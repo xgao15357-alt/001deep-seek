@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Web Translator</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>AI Web Translator</h1>
+    <p class="subtitle">中英双语网页翻译（V1 · Phase 3 DeepSeek）</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <div class="row">
+        <span class="label">翻译引擎：</span>
+        <span class="value" id="provider">DeepSeek</span>
+      </div>
+      <div class="row">
+        <span class="label">翻译方向：</span>
+        <span class="value" id="direction">English → 简体中文</span>
+      </div>
+      <div class="row display-mode">
+        <span class="label">显示模式：</span>
+        <span class="radio-group">
+          <label><input type="radio" name="displayMode" value="bilingual" checked /><span>中英双语</span></label>
+          <label><input type="radio" name="displayMode" value="targetOnly" /><span>仅中文</span></label>
+          <label><input type="radio" name="displayMode" value="original" /><span>原文</span></label>
+        </span>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="row">
+        <span class="label">状态：</span>
+        <span class="value" id="status">未开始</span>
+      </div>
+      <div class="row">
+        <span class="label">已翻译文本块：</span>
+        <span class="value"><span id="progress-done">0</span> / <span id="progress-total">0</span></span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="row">
+        <span class="label">完成度：</span>
+        <span class="value" id="progress-percent">0%</span>
+      </div>
+      <div class="row" id="usage-row" hidden>
+        <span class="label">API 用量：</span>
+        <span class="value" id="usage"></span>
+      </div>
+      <div class="row" id="cache-hit-row" hidden>
+        <span class="label">缓存命中：</span>
+        <span class="value" id="cache-hit"></span>
+      </div>
+    </section>
+
+    <section class="card scan-diag" id="scan-diag-panel" hidden>
+      <p class="scan-diag-title">扫描诊断（开发模式）：</p>
+      <p class="scan-diag-text" id="scan-diag"></p>
+    </section>
+
+    <section class="card risk-panel" id="risk-panel" hidden>
+      <p class="risk-text">当前页面可能包含敏感信息，为降低安全和风控风险，默认暂停翻译。</p>
+      <p class="risk-reasons" id="risk-reasons"></p>
+      <div class="actions">
+        <button type="button" id="btn-cancel-risk" class="btn">取消</button>
+        <button type="button" id="btn-confirm-risk" class="btn btn-warning">仍然翻译</button>
+      </div>
+    </section>
+
+    <section class="actions" id="actions">
+      <button type="button" id="btn-translate" class="btn btn-primary">翻译当前网页</button>
+      <button type="button" id="btn-stop" class="btn">停止翻译</button>
+      <button type="button" id="btn-restore" class="btn">恢复原文</button>
+      <button type="button" id="btn-settings" class="btn">设置</button>
+    </section>
+  </main>
+
+  <footer>
+    <p id="message" class="message" data-kind="info" role="status"></p>
+    <button type="button" id="btn-open-options" class="btn btn-primary" hidden>打开设置</button>
+    <p class="phase-note">Phase 3：真实 DeepSeek 翻译。允许翻译的正文文本将发送至 DeepSeek API（不含 URL、标题、表单、密码、Cookie）。完成度 = 已发现文本块的翻译完成率，不等同于全页文字覆盖率。</p>
+  </footer>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

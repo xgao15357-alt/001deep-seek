@@ -1,0 +1,10 @@
+{
+  "name": "ai-web-translator",
+  "private": true,
+  "version": "0.2.0",
+  "type": "module",
+  "description": "中英双语网页翻译扩展（MV3）。零第三方依赖；package.json 仅供 Node 侧 type=module 与 smoke 测试使用，不参与扩展构建。",
+  "scripts": {
+    "smoke": "node scripts/smoke-test.mjs"
+  }
+}

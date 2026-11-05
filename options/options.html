@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Web Translator · 设置</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <main class="page">
+    <header>
+      <h1>AI Web Translator 设置</h1>
+      <p class="subtitle">
+        所有设置仅保存在本机扩展存储（chrome.storage.local）中。
+        点击“翻译当前网页”后，页面中允许翻译的正文文本会发送给 DeepSeek API
+        （不含 URL、标题、表单、密码、Cookie）。未点击翻译时不会发送任何数据。
+      </p>
+    </header>
+
+    <form id="settings-form">
+      <section class="card">
+        <h2>Translation Provider</h2>
+        <div class="field">
+          <label for="provider">Provider</label>
+          <select id="provider" disabled>
+            <option value="deepseek" selected>DeepSeek</option>
+          </select>
+          <p class="hint">V1 默认使用 DeepSeek；其他 Provider（OpenAI / Gemini / Claude / DeepL 等）将在后续版本开放。</p>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>DeepSeek API Key</h2>
+        <div class="field">
+          <p id="api-key-status" class="key-status" data-kind="warn">未配置</p>
+        </div>
+        <div class="field">
+          <label for="api-key">API Key</label>
+          <input type="password" id="api-key" autocomplete="off" spellcheck="false" placeholder="请输入 DeepSeek API Key" />
+          <div class="btn-row">
+            <button type="button" id="btn-save-key" class="btn btn-primary">保存</button>
+            <button type="button" id="btn-clear-key" class="btn">清除</button>
+          </div>
+          <p class="hint" id="api-key-hint">
+            Key 只保存在本机扩展存储中，保存后不再回显，也不会打印到 Console 或日志。
+            注意：chrome.storage.local 对个人自用方便，但它不是强加密保险箱，请勿在共享设备上保存。
+          </p>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Model</h2>
+        <div class="field">
+          <label for="model">Model</label>
+          <select id="model">
+            <option value="deepseek-v4-flash" selected>DeepSeek V4 Flash（推荐）</option>
+            <option value="deepseek-v4-pro">DeepSeek V4 Pro</option>
+          </select>
+          <p class="hint">网页翻译优先考虑速度与成本，默认 Flash；Pro 质量更高但更慢。</p>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>高级设置</h2>
+        <div class="field">
+          <label for="endpoint">API Endpoint（V1 锁定，只读）</label>
+          <input type="text" id="endpoint" spellcheck="false" disabled />
+          <p class="hint">V1 DeepSeek Provider 固定使用官方端点 https://api.deepseek.com/chat/completions，不能修改为任意服务器；自定义 Endpoint 将在 Custom OpenAI-Compatible Provider 中提供，且不会因此增加任何新的 host 权限。</p>
+        </div>
+        <div class="field">
+          <label for="timeout">Timeout（毫秒）</label>
+          <input type="number" id="timeout" min="1000" step="1000" />
+        </div>
+        <div class="field">
+          <label for="concurrency">并发 batch 数（1–8，同时进行的 API 请求批次数）</label>
+          <input type="number" id="concurrency" min="1" max="8" step="1" />
+        </div>
+        <div class="field">
+          <label for="retries">重试次数（0–5，仅临时错误重试）</label>
+          <input type="number" id="retries" min="0" max="5" step="1" />
+        </div>
+        <div class="field checkbox">
+          <label><input type="checkbox" id="disable-thinking" checked disabled /> Thinking：关闭（网页翻译固定，不可更改）</label>
+        </div>
+        <div class="field checkbox">
+          <label><input type="checkbox" id="cache-toggle" /> 长期翻译缓存（默认关闭；当前仅内存会话缓存，不落地）</label>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button type="submit" id="btn-save-settings" class="btn btn-primary">保存设置</button>
+      </div>
+      <p id="save-status" class="save-status" data-kind="info" role="status"></p>
+    </form>
+  </main>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>

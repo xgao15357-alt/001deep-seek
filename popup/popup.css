@@ -1,0 +1,182 @@
+/* popup.css —— 简洁样式，零外部资源（无 CDN 字体/图标），符合 MV3 默认 CSP。 */
+
+:root {
+  --bg: #f6f7f9;
+  --card: #ffffff;
+  --text: #1f2329;
+  --muted: #6b7280;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --border: #e5e7eb;
+  --danger: #dc2626;
+  --ok: #16a34a;
+  --warning: #b45309;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 320px;
+  margin: 0;
+  padding: 12px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.app-header .subtitle {
+  margin: 2px 0 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 3px 0;
+}
+
+.row .label {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.row .value {
+  word-break: break-all;
+}
+
+.display-mode .radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.progress-track {
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 6px 0 2px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: var(--primary);
+  transition: width 0.2s ease;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.btn {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--card);
+  color: var(--text);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #f3f4f6;
+}
+
+.btn-primary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn-warning {
+  background: var(--warning);
+  border-color: var(--warning);
+  color: #ffffff;
+}
+
+.btn-warning:hover {
+  background: #92400e;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.risk-panel {
+  border-color: var(--warning);
+}
+
+.risk-text {
+  margin: 0 0 6px;
+  color: var(--warning);
+  font-weight: 600;
+}
+
+.risk-reasons {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 12px;
+  word-break: break-all;
+}
+
+.message {
+  margin: 10px 0 0;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  min-height: 18px;
+}
+
+.message[data-kind="error"] {
+  color: var(--danger);
+  background: #fef2f2;
+}
+
+.message[data-kind="success"] {
+  color: var(--ok);
+  background: #f0fdf4;
+}
+
+.message[data-kind="info"] {
+  color: var(--muted);
+  background: #f9fafb;
+}
+
+.phase-note {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}

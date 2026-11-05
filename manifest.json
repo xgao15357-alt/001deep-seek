@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "AI Web Translator",
+  "version": "0.4.0",
+  "description": "用户主动触发的中英双语网页翻译扩展（V1 Phase 4：翻译质量与长网页体验优化）。最小权限：activeTab 用于当前网页，DeepSeek 域名 host 权限仅用于翻译 API。",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://api.deepseek.com/*"
+  ],
+  "background": {
+    "service_worker": "src/background/service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "AI Web Translator",
+    "default_popup": "popup/popup.html"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  }
+}
